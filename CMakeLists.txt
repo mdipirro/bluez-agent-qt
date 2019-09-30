@@ -12,7 +12,6 @@ find_package(Qt5 REQUIRED COMPONENTS Core DBus)
 add_executable(${PROJECT_NAME}
     "main.cpp"
     "pairingagentwithvalidation.h"
-    "pairingagentwithvalidation.cpp"
     "btmacaddressagent.h"
     "btmacaddressagent.cpp"
     "adaptor.cpp"
