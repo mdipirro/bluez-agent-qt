@@ -1,3 +1,7 @@
+/*
+ * Copyright 2019 Matteo Di Pirro
+ */
+
 #ifndef PAIRINGAGENT_H
 #define PAIRINGAGENT_H
 
@@ -13,6 +17,7 @@ public:
     PairingAgentWithValidation(const std::function<bool(Args...)>& validationFunction, QObject *parent = nullptr): validationFunction(validationFunction), QObject(parent) {}
     virtual ~PairingAgentWithValidation() = default;
 
+    // virtual methods implementing the functionality of a Bluetooth agent
     virtual void Release() const = 0;
     virtual QString RequestPinCode(const QDBusObjectPath& device) const = 0;
     virtual void DisplayPinCode(const QDBusObjectPath& device, const QString& pincode) const = 0;
@@ -27,12 +32,13 @@ protected:
     static const inline QString REJECTED{"org.bluez.Error.Rejected"};
     static const inline QString CANCELED{"org.bluez.Error.Canceled"};
 
+    // Invokes the validation function exploding the template arguments
     bool validatePairing(const Args&... args) const {
         return validationFunction(args...);
     }
 
 private:
-    std::function<bool(Args...  )> validationFunction;
+    std::function<bool(Args...  )> validationFunction; // predicate from Args to bool
 };
 
 #endif // PAIRINGAGENT_H

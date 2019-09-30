@@ -1,3 +1,7 @@
+/*
+ * Copyright 2019 Matteo Di Pirro
+ */
+
 #include <QCoreApplication>
 
 #include "adaptor.h"
